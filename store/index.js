@@ -1,17 +1,17 @@
 export const state = () => ({
-    pref: [],
+    prefs: [],
     population: []
 })
   
 export const mutations = {
     setPref(state, data) {
-        state.pref = data
+        state.prefs = data
     }
 }
   
 export const getters = {
     getPref: (state) => {
-        return state.pref
+        return state.prefs
     }
 }
   
