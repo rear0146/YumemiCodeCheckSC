@@ -1,7 +1,7 @@
 <template>
   <div>
     <GlobalHeader />
-    <Population />
+    <DisplayPopulation />
   </div>
 </template>
 
