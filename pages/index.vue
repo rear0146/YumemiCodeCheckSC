@@ -1,5 +1,8 @@
 <template>
-  <Tutorial />
+  <div>
+    <GlobalHeader />
+    <Population />
+  </div>
 </template>
 
 <script>
