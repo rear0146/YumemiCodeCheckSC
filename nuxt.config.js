@@ -22,6 +22,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/YumemiCodeCheckSC/favicon.ico' }],
   },
+  publicRuntimeConfig: {
+    RESAS_API_KEY: process.env.RESAS_API_KEY,
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
