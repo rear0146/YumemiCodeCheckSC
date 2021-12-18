@@ -30,7 +30,7 @@ export const getters = {
 
         state.population.forEach((item) => {
         const obj = {
-            pref: item.pref,
+            label: item.pref.prefName,
             data: item.data.map((obj) => obj.value)
         }
         datasets.push(obj)
