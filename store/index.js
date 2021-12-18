@@ -25,17 +25,17 @@ export const getters = {
     getPref: (state) => {
         return state.prefs
     },
-    getDataset: (state) => {
-        const dataset = []
+    getDatasets: (state) => {
+        const datasets = []
 
         state.population.forEach((item) => {
         const obj = {
             pref: item.pref,
             data: item.data.map((obj) => obj.value)
         }
-        dataset.push(obj)
+        datasets.push(obj)
         })
-        return dataset
+        return datasets
     }
 }
 

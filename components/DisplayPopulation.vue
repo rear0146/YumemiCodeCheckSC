@@ -37,7 +37,7 @@ export default{
       return this.$store.getters.getPref
     },
     datasets() {
-      return this.$store.getters.getDataset
+      return this.$store.getters.getDatasets
     }
   },
   mounted() {
