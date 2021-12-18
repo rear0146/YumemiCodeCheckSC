@@ -10,6 +10,7 @@
                 v-model="selectedPrefs"
                 type="checkbox"
                 :value="pref"
+                @change="togglePref(pref)"
               />
               {{ pref.prefName }}
           </label>
@@ -18,7 +19,7 @@
     </div>
     <div>
       <h2>グラフ</h2>
-        {{ selectedPrefs }}
+        {{ datasets }}
     </div>
   </div>
 </template>
@@ -34,6 +35,9 @@ export default{
   computed: {
     prefs() {
       return this.$store.getters.getPref
+    },
+    datasets() {
+      return this.$store.getters.getDataset
     }
   },
   mounted() {
@@ -42,6 +46,13 @@ export default{
   methods: {
     fetchPref() {
       this.$store.dispatch('fetchPref')
+    },
+    togglePref(pref) {
+      if (this.selectedPrefs.includes(pref)) {
+        this.$store.dispatch('fetchPopulation', pref)
+      } else {
+        this.$store.commit('removePref', pref)
+      }
     }
   }
 }
