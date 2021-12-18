@@ -19,7 +19,7 @@
     </div>
     <div>
       <h2>グラフ</h2>
-        {{ datasets }}
+        <LineChart :chart-data="chartData" :options="chartOptions" />
     </div>
   </div>
 </template>
@@ -29,15 +29,35 @@ export default{
   name: 'DisplayPopulation',
   data () {
     return { 
-      selectedPrefs: []
+      selectedPrefs: [],
+      chartOptions: {
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                callback: (label, index, labels) =>
+                  `${label.toLocaleString()}人`
+              }
+            }
+          ],
+          xAxes: [
+            {
+              ticks: {
+                callback: (label, index, labels) => `${label}年`
+              }
+            }
+          ]
+        }
+      }
       }
   },
   computed: {
     prefs() {
       return this.$store.getters.getPref
     },
-    datasets() {
-      return this.$store.getters.getDataset
+    chartData() {
+      return this.$store.getters.getChartData
     }
   },
   mounted() {

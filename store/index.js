@@ -25,17 +25,29 @@ export const getters = {
     getPref: (state) => {
         return state.prefs
     },
-    getDataset: (state) => {
-        const dataset = []
+    getLabels: (state) => {
+        if (state.population.length < 1) return []
+        return state.population[0].data.map((obj) => obj.year)
+    },
+    getDatasets: (state) => {
+        const datasets = []
 
         state.population.forEach((item) => {
         const obj = {
-            pref: item.pref,
-            data: item.data.map((obj) => obj.value)
+            label: item.pref.prefName,
+            data: item.data.map((obj) => obj.value),
+            fill: false,
         }
-        dataset.push(obj)
+        datasets.push(obj)
         })
-        return dataset
+        return datasets
+    },
+    getChartData: (state, getters) => {
+        const chartData = {
+        labels: getters.getLabels,
+        datasets: getters.getDatasets
+        }
+        return JSON.parse(JSON.stringify(chartData))
     }
 }
 
