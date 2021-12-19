@@ -9,9 +9,11 @@ export const mutations = {
     },
     setPopulation(state, data) {
         const indexOfPopulation = data.result.data.map((el) => el.label).indexOf("総人口")
+        const RGB = this.$prefCodeToColor(data.pref.prefCode)
         const obj = {
         pref: data.pref,
-        data: data.result.data[indexOfPopulation].data
+        data: data.result.data[indexOfPopulation].data,
+        color: `rgba(${RGB[0]},${RGB[1]},${RGB[2]},1)`
         }
         state.population.push(obj)
     },
@@ -33,12 +35,14 @@ export const getters = {
         const datasets = []
 
         state.population.forEach((item) => {
-        const obj = {
-            label: item.pref.prefName,
-            data: item.data.map((obj) => obj.value),
-            fill: false,
-        }
-        datasets.push(obj)
+            const obj = {
+                label: item.pref.prefName,
+                data: item.data.map((obj) => obj.value),
+                fill: false,
+                backgroundColor: item.color,
+                borderColor: item.color,
+            }
+            datasets.push(obj)
         })
         return datasets
     },

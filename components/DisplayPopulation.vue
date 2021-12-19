@@ -19,7 +19,10 @@
     </div>
     <div>
       <h2>グラフ</h2>
-        <LineChart :chart-data="chartData" :options="chartOptions" />
+        <LineChart 
+        v-if="selectedPrefs.length"
+        :chart-data="chartData" 
+        :options="chartOptions" />
     </div>
   </div>
 </template>
@@ -36,7 +39,7 @@ export default{
           yAxes: [
             {
               ticks: {
-                callback: (label, index, labels) =>
+                callback: (label) =>
                   `${label.toLocaleString()}人`
               }
             }
@@ -44,7 +47,7 @@ export default{
           xAxes: [
             {
               ticks: {
-                callback: (label, index, labels) => `${label}年`
+                callback: (label) => `${label}年`
               }
             }
           ]
