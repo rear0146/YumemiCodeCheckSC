@@ -93,7 +93,7 @@ export default{
 .container {
   width: 96%;
   max-width: 760px;
-  min-height: 760px;
+  min-height: 750px;
   margin: 10px auto;
   padding: 10px 0 5px 0;
   border-radius: 20px;
