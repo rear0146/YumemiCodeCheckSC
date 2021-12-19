@@ -9,10 +9,13 @@ export const mutations = {
     },
     setPopulation(state, data) {
         const indexOfPopulation = data.result.data.map((el) => el.label).indexOf("総人口")
+        const boundaryYear = data.result.boundaryYear
         const RGB = this.$prefCodeToColor(data.pref.prefCode)
         const obj = {
         pref: data.pref,
-        data: data.result.data[indexOfPopulation].data,
+        data: data.result.data[indexOfPopulation].data.filter((val) => {
+            return val.year <= boundaryYear;
+        }),
         color: `rgba(${RGB[0]},${RGB[1]},${RGB[2]},1)`
         }
         state.population.push(obj)
