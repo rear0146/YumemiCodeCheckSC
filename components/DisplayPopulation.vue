@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div>
+  <div class="container">
+    <div class="section">
       <h2>都道府県を選択</h2>
-        <ul>
+        <ul class="prefList">
         <li v-for="pref in prefs" :key="pref.prefCode">
           <label>
               <input
@@ -12,17 +12,20 @@
                 :value="pref"
                 @change="togglePref(pref)"
               />
+              <div :style="prefNameStyle(pref.prefCode)" class="prefName">
               {{ pref.prefName }}
+              </div>
           </label>
         </li>
       </ul>
     </div>
-    <div>
+    <div class="section">
       <h2>グラフ</h2>
         <LineChart 
         v-if="selectedPrefs.length"
         :chart-data="chartData" 
-        :options="chartOptions" />
+        :options="chartOptions"
+        class="chart" />
     </div>
   </div>
 </template>
@@ -39,8 +42,7 @@ export default{
           yAxes: [
             {
               ticks: {
-                callback: (label) =>
-                  `${label.toLocaleString()}人`
+                callback: (label) =>`${label.toLocaleString()}人`
               }
             }
           ],
@@ -70,6 +72,12 @@ export default{
     fetchPref() {
       this.$store.dispatch('fetchPref')
     },
+    prefNameStyle(prefCode) {
+      const RGB = this.$prefCodeToColor(prefCode)
+      return {
+        '--color' : `rgba(${RGB[0]},${RGB[1]},${RGB[2]},1)`
+      }
+    },
     togglePref(pref) {
       if (this.selectedPrefs.includes(pref)) {
         this.$store.dispatch('fetchPopulation', pref)
@@ -80,3 +88,63 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+.container {
+  width: 96%;
+  max-width: 760px;
+  min-height: 720px;
+  margin: 10px auto;
+  padding: 10px 0 5px 0;
+  border-radius: 20px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+  margin: 3px 10px;
+  color: #464ec5;
+  border-bottom: solid 3px #464ec5;
+}
+
+.prefList {
+  width: 96%;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.prefList li {
+  display: inline-block;
+  margin: 5px 3px;
+}
+
+.prefList li input {
+display: none;
+}
+
+.prefName {
+  padding: 2px 10px;
+  border: 1px solid var(--color);
+  color: var(--color);
+  border-radius: 20px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.prefName:hover {
+  border-radius: 20px;
+  transition-duration: 0.2s;
+  box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.prefList li input:checked ~ .prefName {
+  color: #FFFFFF;
+  background-color: var(--color);
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3) inset;
+}
+
+.chart{
+  width: 96%;
+  margin: 0 auto;
+}
+
+</style>
