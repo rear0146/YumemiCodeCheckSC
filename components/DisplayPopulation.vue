@@ -93,11 +93,15 @@ export default{
 .container {
   width: 96%;
   max-width: 760px;
-  min-height: 720px;
+  min-height: 750px;
   margin: 10px auto;
   padding: 10px 0 5px 0;
   border-radius: 20px;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+}
+
+.section {
+  margin-bottom: 5px;
 }
 
 h2 {
