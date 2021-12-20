@@ -2,7 +2,8 @@
   <div class="container">
     <div class="section">
       <h2>都道府県を選択</h2>
-        <ul class="prefList">
+      <ul class="prefList">
+        <!-- 都道府県の一覧 -->
         <li v-for="pref in prefs" :key="pref.prefCode">
           <label>
               <input
@@ -21,6 +22,7 @@
     </div>
     <div class="section">
       <h2>グラフ</h2>
+      <!-- 選択された都道府県の人口をチャートで表示 -->
         <LineChart 
         v-if="selectedPrefs.length"
         :chart-data="chartData" 
@@ -69,16 +71,19 @@ export default{
     this.fetchPref()
   },
   methods: {
-    fetchPref() {
+    fetchPref() { 
+      // 都道府県の読み込み
       this.$store.dispatch('fetchPref')
     },
-    prefNameStyle(prefCode) {
+    prefNameStyle(prefCode) { 
+      // 各都道府県固有の色
       const RGB = this.$prefCodeToColor(prefCode)
       return {
         '--color' : `rgba(${RGB[0]},${RGB[1]},${RGB[2]},1)`
       }
     },
-    togglePref(pref) {
+    togglePref(pref) { 
+      // 各都道府県が選択/選択解除されたときの処理
       if (this.selectedPrefs.includes(pref)) {
         this.$store.dispatch('fetchPopulation', pref)
       } else {
@@ -90,26 +95,7 @@ export default{
 </script>
 
 <style scoped>
-.container {
-  width: 96%;
-  max-width: 760px;
-  min-height: 750px;
-  margin: 10px auto;
-  padding: 10px 0 5px 0;
-  border-radius: 20px;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
-}
-
-.section {
-  margin-bottom: 5px;
-}
-
-h2 {
-  margin: 3px 10px;
-  color: #464ec5;
-  border-bottom: solid 3px #464ec5;
-}
-
+/* ----- 都道府県一覧 ----- */
 .prefList {
   width: 96%;
   list-style-type: none;
@@ -126,6 +112,7 @@ h2 {
 display: none;
 }
 
+/* ----- 一覧の各都道府県 ----- */
 .prefName {
   padding: 2px 10px;
   border: 1px solid var(--color);
@@ -146,7 +133,8 @@ display: none;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3) inset;
 }
 
-.chart{
+/* ----- チャート ----- */
+.chart {
   width: 96%;
   margin: 0 auto;
 }
