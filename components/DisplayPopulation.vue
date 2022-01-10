@@ -6,16 +6,16 @@
         <!-- 都道府県の一覧 -->
         <li v-for="pref in prefs" :key="pref.prefCode">
           <label>
-              <input
-                :id="pref"
-                v-model="selectedPrefs"
-                type="checkbox"
-                :value="pref"
-                @change="togglePref(pref)"
-              />
-              <div :style="prefNameStyle(pref.prefCode)" class="prefName">
+            <input
+              :id="pref"
+              v-model="selectedPrefs"
+              type="checkbox"
+              :value="pref"
+              @change="togglePref(pref)"
+            />
+            <div :style="prefNameStyle(pref.prefCode)" class="prefName">
               {{ pref.prefName }}
-              </div>
+            </div>
           </label>
         </li>
       </ul>
@@ -23,20 +23,21 @@
     <div class="section">
       <h2>グラフ</h2>
       <!-- 選択された都道府県の人口をチャートで表示 -->
-        <LineChart 
+      <LineChart
         v-if="selectedPrefs.length"
-        :chart-data="chartData" 
+        :chart-data="chartData"
         :options="chartOptions"
-        class="chart" />
+        class="chart"
+      />
     </div>
   </div>
 </template>
 
 <script>
-export default{
+export default {
   name: 'DisplayPopulation',
-  data () {
-    return { 
+  data() {
+    return {
       selectedPrefs: [],
       chartOptions: {
         maintainAspectRatio: false,
@@ -44,20 +45,20 @@ export default{
           yAxes: [
             {
               ticks: {
-                callback: (label) =>`${label.toLocaleString()}人`
-              }
-            }
+                callback: (label) => `${label.toLocaleString()}人`,
+              },
+            },
           ],
           xAxes: [
             {
               ticks: {
-                callback: (label) => `${label}年`
-              }
-            }
-          ]
-        }
-      }
-      }
+                callback: (label) => `${label}年`,
+              },
+            },
+          ],
+        },
+      },
+    }
   },
   computed: {
     prefs() {
@@ -65,32 +66,32 @@ export default{
     },
     chartData() {
       return this.$store.getters.getChartData
-    }
+    },
   },
   mounted() {
     this.fetchPref()
   },
   methods: {
-    fetchPref() { 
+    fetchPref() {
       // 都道府県の読み込み
       this.$store.dispatch('fetchPref')
     },
-    prefNameStyle(prefCode) { 
+    prefNameStyle(prefCode) {
       // 各都道府県固有の色
       const RGB = this.$prefCodeToColor(prefCode)
       return {
-        '--color' : `rgba(${RGB[0]},${RGB[1]},${RGB[2]},1)`
+        '--color': `rgba(${RGB[0]},${RGB[1]},${RGB[2]},1)`,
       }
     },
-    togglePref(pref) { 
+    togglePref(pref) {
       // 各都道府県が選択/選択解除されたときの処理
       if (this.selectedPrefs.includes(pref)) {
         this.$store.dispatch('fetchPopulation', pref)
       } else {
         this.$store.commit('removePref', pref)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -109,7 +110,7 @@ export default{
 }
 
 .prefList li input {
-display: none;
+  display: none;
 }
 
 /* ----- 一覧の各都道府県 ----- */
@@ -128,7 +129,7 @@ display: none;
 }
 
 .prefList li input:checked ~ .prefName {
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: var(--color);
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3) inset;
 }
@@ -138,5 +139,4 @@ display: none;
   width: 96%;
   margin: 0 auto;
 }
-
 </style>
