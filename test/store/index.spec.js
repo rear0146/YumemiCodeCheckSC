@@ -15,30 +15,35 @@ jest.mock('axios', () => ({
 }))
 
 describe('store/index.js', () => {
-    let store
-    beforeEach(() => {
-      store = new Vuex.Store(index)
-    })
-    describe('getters', () => {
-      test('prefの値を取得', () => {
-        store.replaceState({
-          pref: [{prefCode: 1, prefName: "北海道"}]
-        })
-        expect(store.getters['this.pref']).toBe([{prefCode: 1, prefName: "北海道"}])
+  let store
+  beforeEach(() => {
+    store = new Vuex.Store(index)
+  })
+  describe('getters', () => {
+    test('prefの値を取得', () => {
+      store.replaceState({
+        pref: [{ prefCode: 1, prefName: '北海道' }],
       })
-    })
-    describe('actions', () => {
-      let commit
-      let state
-      beforeEach(() => {
-        commit = store.commit
-        state = store.state
-      })
-      test('fetchPref', async done => {
-        action = "fetchPref"
-        await testedAction({ commit, state })
-        expect(store.getters['this.pref']).toBe({prefCode: 1, prefName: "北海道"})
-        done()
-      })
+      expect(store.getters['this.pref']).toBe([
+        { prefCode: 1, prefName: '北海道' },
+      ])
     })
   })
+  describe('actions', () => {
+    let commit
+    let state
+    beforeEach(() => {
+      commit = store.commit
+      state = store.state
+    })
+    test('fetchPref', async (done) => {
+      action = 'fetchPref'
+      await testedAction({ commit, state })
+      expect(store.getters['this.pref']).toBe({
+        prefCode: 1,
+        prefName: '北海道',
+      })
+      done()
+    })
+  })
+})

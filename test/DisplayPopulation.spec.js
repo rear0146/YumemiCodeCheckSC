@@ -11,7 +11,7 @@ describe('DisplayPopulation', () => {
   beforeEach(() => {
     wrapper = mount(DisplayPopulation, {
       store: index,
-      localVue
+      localVue,
     })
   })
   test('is a Vue instance', () => {
