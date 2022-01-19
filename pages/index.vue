@@ -1,6 +1,5 @@
 <template>
   <div>
-    <GlobalHeader />
     <DisplayPopulation />
   </div>
 </template>
