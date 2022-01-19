@@ -9,6 +9,7 @@
             v-model="selectedPrefs"
             type="checkbox"
             :value="pref"
+            :disabled="isProcessing()"
             @change="togglePref(pref)"
           />
           <div :style="prefNameStyle(pref.prefCode)" class="prefName">
@@ -21,8 +22,10 @@
 </template>
 
 <script>
+import Mixin from '@/mixins/processing.js'
 export default {
   name: 'PrefList',
+  mixins: [ Mixin ],
   data() {
     return {
       selectedPrefs: [],
@@ -49,12 +52,16 @@ export default {
       }
     },
     togglePref(pref) {
+       this.startProcessing()
       // 各都道府県が選択/選択解除されたときの処理
       if (this.selectedPrefs.includes(pref)) {
         this.$store.dispatch('fetchPopulation', pref)
       } else {
         this.$store.commit('removePref', pref)
       }
+      setTimeout(function () {
+        this.endProcessing()
+      }.bind(this), 300)
     },
   },
 }
