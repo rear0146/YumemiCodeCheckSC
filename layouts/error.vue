@@ -5,14 +5,19 @@
     <NuxtLink to="/" class="TopPageLink">トップページへ戻る</NuxtLink>
   </div>
 </template>
- 
+
 <script>
 export default {
   props: {
-    error: { type: Object, default () { return {} } }
+    error: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
   },
   computed: {
-    errorMessage () {
+    errorMessage() {
       if (this.error.statusCode === 404) {
         return 'ページが存在しません'
       }
@@ -20,23 +25,23 @@ export default {
         return this.error.message
       }
       if (this.error.statusCode === 429) {
-          return 'APIへのリクエスト回数が多く、 1秒あたりのリクエスト平均数・リクエスト数/日のうち、どちらかの制限を超えました。リトライしてください'
+        return 'APIへのリクエスト回数が多く、 1秒あたりのリクエスト平均数・リクエスト数/日のうち、どちらかの制限を超えました。リトライしてください'
       }
       return 'エラーが発生しました'
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .TopPageLink {
-    color: #464ec5;
-    display: block;
-    text-align: center;
-    margin: 30px auto;
+  color: #464ec5;
+  display: block;
+  text-align: center;
+  margin: 30px auto;
 }
 </style>
