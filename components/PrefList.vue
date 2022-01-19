@@ -1,8 +1,6 @@
 <template>
-  <div class="container">
-    <div class="section">
-      <h2>都道府県を選択</h2>
-      <ul class="prefList">
+    <div>
+        <ul class="prefList">
         <!-- 都道府県の一覧 -->
         <li v-for="pref in prefs" :key="pref.prefCode">
           <label>
@@ -20,53 +18,20 @@
         </li>
       </ul>
     </div>
-    <div class="section">
-      <h2>グラフ</h2>
-      <!-- 選択された都道府県の人口をチャートで表示 -->
-      <LineChart
-        v-if="selectedPrefs.length"
-        :chart-data="chartData"
-        :options="chartOptions"
-        class="chart"
-      />
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'DisplayPopulation',
-  data() {
-    return {
-      selectedPrefs: [],
-      chartOptions: {
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                callback: (label) => `${label.toLocaleString()}人`,
-              },
-            },
-          ],
-          xAxes: [
-            {
-              ticks: {
-                callback: (label) => `${label}年`,
-              },
-            },
-          ],
-        },
-      },
-    }
-  },
-  computed: {
+    name: 'PrefList',
+    data() {
+        return {
+            selectedPrefs: [],
+        }
+    },
+    computed: {
     prefs() {
       return this.$store.getters.getPref
-    },
-    chartData() {
-      return this.$store.getters.getChartData
-    },
+    }
   },
   mounted() {
     this.fetchPref()
@@ -96,12 +61,8 @@ export default {
 </script>
 
 <style scoped>
-/* ----- 都道府県一覧 ----- */
 .prefList {
-  width: 96%;
   list-style-type: none;
-  margin: 0 auto;
-  padding: 0;
 }
 
 .prefList li {
@@ -150,9 +111,4 @@ export default {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3) inset;
 }
 
-/* ----- チャート ----- */
-.chart {
-  width: 96%;
-  margin: 0 auto;
-}
 </style>
