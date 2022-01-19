@@ -107,7 +107,6 @@ export default {
 .prefList li {
   display: inline-block;
   margin: 5px 3px;
-  cursor: pointer;
 }
 
 .prefList li input {
