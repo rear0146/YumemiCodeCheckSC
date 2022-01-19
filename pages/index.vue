@@ -7,7 +7,7 @@
     <div class="section">
       <h2>グラフ</h2>
       <!-- 選択された都道府県の人口をチャートで表示 -->
-      <DisplayLineChart class="chart" />
+      <DisplayPopulationLineChart class="chart" />
     </div>
   </div>
 </template>
