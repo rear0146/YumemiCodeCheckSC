@@ -1,18 +1,18 @@
 export default {
-data() {
+  data() {
     return {
-    processing: false
+      processing: false,
     }
-},
-methods: {
+  },
+  methods: {
     startProcessing() {
-        this.processing = true
+      this.processing = true
     },
     endProcessing() {
-        this.processing = false
+      this.processing = false
     },
     isProcessing() {
-        return this.processing
-    }
-}
+      return this.processing
+    },
+  },
 }
