@@ -122,8 +122,12 @@ h2 {
   margin: 5px 3px;
 }
 
+.prefList li label {
+  cursor: pointer;
+}
+
 .prefList li input {
-display: none;
+  display: none;
 }
 
 .prefName {
