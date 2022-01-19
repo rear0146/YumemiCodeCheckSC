@@ -40,6 +40,6 @@ export default {
     chartData() {
       return this.$store.getters.getChartData
     },
-  }
+  },
 }
 </script>
