@@ -5,7 +5,7 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   router: {
-    base: '/YumemiCodeCheckSC/'
+    base: '/YumemiCodeCheckSC/',
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -20,7 +20,13 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/YumemiCodeCheckSC/favicon.ico' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/YumemiCodeCheckSC/favicon.ico',
+      },
+    ],
   },
   publicRuntimeConfig: {
     RESAS_API_KEY: process.env.RESAS_API_KEY,
@@ -31,9 +37,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '@/plugins/axios', ssr: false, },
-    { src: '@/plugins/vue-chartjs', ssr: false, },
-    { src: '@/plugins/prefCodeToColor', ssr: false, }
+    { src: '@/plugins/axios', ssr: false },
+    { src: '@/plugins/vue-chartjs', ssr: false },
+    { src: '@/plugins/prefCodeToColor', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
