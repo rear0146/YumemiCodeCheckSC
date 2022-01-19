@@ -2,7 +2,7 @@
   <div>
     <!-- 選択された都道府県の人口をチャートで表示 -->
     <LineChart
-      v-if="$store.state.population.length"
+      v-show="$store.state.population.length"
       :chart-data="chartData"
       :options="chartOptions"
     />
@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       chartOptions: {
+        responsive: true,
         maintainAspectRatio: false,
         scales: {
           yAxes: [
