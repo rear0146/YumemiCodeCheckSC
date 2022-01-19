@@ -107,11 +107,20 @@ export default {
 .prefList li {
   display: inline-block;
   margin: 5px 3px;
+}
+
+
+.prefList li label {
   cursor: pointer;
 }
 
-.prefList li input {
-  display: none;
+.prefList li input[type="checkbox"] {
+  filter: alpha(opacity=0);
+  -moz-opacity:0;
+  opacity:0;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
 }
 
 /* ----- 一覧の各都道府県 ----- */
@@ -124,6 +133,12 @@ export default {
 }
 
 .prefName:hover {
+  border-radius: 20px;
+  transition-duration: 0.2s;
+  box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.prefList li input:focus ~ .prefName {
   border-radius: 20px;
   transition-duration: 0.2s;
   box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.4);
